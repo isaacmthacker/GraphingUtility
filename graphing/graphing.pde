@@ -1,36 +1,49 @@
-Plot p;
+PlotManager p;
 
 int cnt = 0;
+boolean clicked = false;
+float recx, recy;
 void setup() {
   size(800, 500);
 
-  String path = "C:\\Users\\ithacker\\Desktop\\InterruptThresChanges\\Data1-15 Spartan_007 (Optics Lab)\\raw\\0.csv";
+  String path = "//Users//ithacker//Desktop//points.csv";
   FileReader file = new FileReader(path);
 
   ArrayList<ArrayList<DataPoint>> data = file.ReadCSV();
   if (data == null) {
     println("File doesn't exist");
+  } else {
+    p = new PlotManager(data);
+    p.SetYAxis(-1, 1);
   }
 
 
   println("done");
 
-  p = new Plot();
-  ArrayList<DataPoint> arr = new ArrayList<DataPoint>();
-  float angle = 0.0;
-  float step = PI/24.0;
-  for (int i = 0; i < 200; ++i) {
-    if (i%1000000 == 0) {
-      println(i);
-    }
-    arr.add(new DataPoint(sin(angle)));
-    angle += step;
-  }
-  println("set data");
-  p.SetData(arr);
-  println("after set data");
-  //p.SetYAxis(-0.5, 0.5);
+  //ArrayList<DataPoint> sin = new ArrayList<DataPoint>();
+  //ArrayList<DataPoint> cos = new ArrayList<DataPoint>();
+  //ArrayList<DataPoint> tan = new ArrayList<DataPoint>();
+  //float angle = 0.0;
+  //float step = PI/24.0;
+  //for (int i = 0; i < 100; ++i) {
+  //  println(sin(angle), cos(angle));
+  //  sin.add(new DataPoint(sin(angle)));
+  //  cos.add(new DataPoint(cos(angle)));
+  //  tan.add(new DataPoint(tan(angle)));
+  //  angle += step;
+  //}
+  //println("set data");
+  //println("after set data");
+  //ArrayList<ArrayList<DataPoint>> trig = new ArrayList<ArrayList<DataPoint>>();
+  //trig.add(sin);
+  //trig.add(cos);
+  //trig.add(tan);
+  //p = new PlotManager(trig);
+  //p.SetYAxis(-1, 1);
 }
+
+
+
 
 void draw() {
   background(0);
@@ -40,9 +53,23 @@ void draw() {
   //println("done ", cnt);
   //noLoop();
   ++cnt;
+  if (clicked) {
+    noFill();
+    stroke(255);
+    rect(recx, recy, mouseX-recx, mouseY-recy);
+  }
 }
 
+void mousePressed() {
+  if (clicked) {
+    clicked = false;
+  } else {
+    clicked = true;
+    recx = mouseX;
+    recy = mouseY;
+  }
+}
 
-//void mouseMoved() {
-//  p.checkMouseIntersection();
-//}
+void mouseReleased() {
+  clicked = false;
+}

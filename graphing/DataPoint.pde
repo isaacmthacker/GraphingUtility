@@ -1,24 +1,31 @@
 class DataPoint {
+  //Indicates if the data points has a value associated with it
+  //A form of the None type
   boolean hasValue;
+  //data point
   float val;
+  //graphical x and y locations
   float graph_x, graph_y;
-  float pointSize = 3.0;
+  //size of ellipse
+  float pointSize = 5.0;
+  //Constructor with data
   DataPoint(float x) {
     val = x;
     hasValue = true;
   }
+  //None constructor
   DataPoint() {
     hasValue = false;
   }
+  //Draws point to PGraphics object
   void display(PGraphics pg) {
-    //pg.fill(color(255, 0, 0));
-    //println(graph_x, graph_y);
     pg.ellipse(graph_x, graph_y, pointSize, pointSize);
   }
+  //Draws point to screen
   void display() {
-    fill(color(255, 0, 0));
-    ellipse(graph_x, graph_y, 3, 3);
+    ellipse(graph_x, graph_y, pointSize, pointSize);
   }
+  //Draws point to screen with label
   void displayWithLabel() {
     display();
     text(val, graph_x, graph_y-30);
