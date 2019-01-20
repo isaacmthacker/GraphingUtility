@@ -22,7 +22,7 @@ class PlotManager extends PlotObject {
     //for (int i = 0; i < d.size(); ++i) {
     //  colors[i] = color(random(0, 255), random(0, 255), random(0, 255));
     //}
-    
+
     //Set Y-axis for all plots
     SetYAxis(miny, maxy);
   }
@@ -38,10 +38,11 @@ class PlotManager extends PlotObject {
   }
   void drawGridLines() {
     pg.stroke(255);
-    pg.line(lcx, lcy, rcx, lcy);
-    pg.line(lcx, lcy, lcx, rcy);
-    pg.line(lcx, rcy, rcx, rcy);
-    pg.line(rcx, rcy, rcx, lcy);
+    pg.rectMode(CORNERS);
+    pg.noFill();
+    pg.rect(lcx, lcy, rcx, rcy);
+    pg.fill(255);
+    pg.rectMode(CORNER);
     pg.stroke(0);
   }
   void display() {

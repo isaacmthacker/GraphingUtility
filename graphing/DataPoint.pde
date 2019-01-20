@@ -5,7 +5,9 @@ class DataPoint {
   //data point
   float val;
   //graphical x and y locations
-  float graph_x, graph_y;
+  float graph_x = -10;
+  float graph_y = -10;
+
   //size of ellipse
   float pointSize = 5.0;
   //Constructor with data

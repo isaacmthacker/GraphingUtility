@@ -6,8 +6,8 @@ class Plot extends PlotObject {
   //boolean to see if we need to update our PGraphics object or not
   boolean graphChanged = true;
   //Used to see if we need to find the point of intersection
-  float prevMouseX = mouseX;
-  float prevMouseY = mouseY;
+  float prevMouseX = -20;
+  float prevMouseY = -20;
   //Used to display highlighted ellipse
   DataPoint lastIntersectedPoint = null;
   Plot() {
@@ -125,10 +125,8 @@ class Plot extends PlotObject {
     if (mouseX == prevMouseX && mouseY == prevMouseY 
       && lastIntersectedPoint != null
       && lastIntersectedPoint.intersectMouse()) {
-      //println("no change");
       intersect = true;
     } else {
-      //println("change");
       for (DataPoint p : data) {
         if (p.intersectMouse()) {
           prevMouseX = mouseX;
