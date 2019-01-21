@@ -64,19 +64,23 @@ class Plot extends PlotObject {
     float val = (point-miny)*scale + lcy;
     return val;
   }
+  void UpdateGraph() {
+    graphChanged = true;
+  }
   //Draws data points to our PGraphics object
   void drawData() {
+    println("draw data", startidx, endidx);
     float xPos = lcx;
-    float xstep = w/(data.size()-1);
+    float xstep = w/(endidx-startidx);//w/(data.size()-1);
     //pg.fill(color(255, 0, 0));
     boolean prevHasData = false;
-    if (data.get(0).hasData()) {
-      drawPoint(data.get(0), xPos);
+    if (data.get(startidx).hasData()) {
+      drawPoint(data.get(startidx), xPos);
       prevHasData = true;
     }
     DataPoint prev = data.get(0);
     xPos += xstep;
-    for (int i = 1; i < data.size(); ++i) {
+    for (int i = startidx+1; i < endidx; ++i) {
       DataPoint cur = data.get(i); 
       if (cur.hasData()) {
         drawPoint(cur, xPos);

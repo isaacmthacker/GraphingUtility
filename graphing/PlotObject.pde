@@ -15,6 +15,8 @@ abstract class PlotObject {
   float p = 0.025;
   //PGraphics object to draw graph to avoid extra drawing in the main loop
   PGraphics pg;
+  //Used to determine which indicies are being drawn
+  int startidx, endidx;      //endidx exclusive
   PlotObject() { 
     lcx = width*p;
     lcy = height*(1-p);
